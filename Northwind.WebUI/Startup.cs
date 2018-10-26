@@ -1,9 +1,11 @@
 using FluentValidation.AspNetCore;
 using MediatR;
 using MediatR.Pipeline;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +15,7 @@ using Northwind.Application.Infrastructure;
 using Northwind.Application.Products.Queries.GetProduct;
 using Northwind.Persistence;
 using Northwind.WebUI.Filters;
+using Northwind.WebUI.Security;
 using NSwag.AspNetCore;
 using System.Reflection;
 
@@ -58,7 +61,27 @@ namespace Northwind.WebUI
             {
                 configuration.RootPath = "ClientApp/dist";
             });
-        }
+
+			// Add custom authorization claim based policy.
+			services.AddAuthorization(options =>
+			{
+				options.AddPolicy(
+					CustomPolicies.OnlyUsersOlderThan,
+					policy => policy
+						.RequireClaim(CustomClaimTypes.DateOfBirth)
+						.AddRequirements(new OlderThanRequirement(Configuration.GetValue<int>("MinimumAge"))));
+			});
+
+			// Register Older Than authorization handler.
+			services.AddSingleton<IAuthorizationHandler, OlderThanAuthorizationHandler>();
+
+			// Add versioning API.
+			services.AddApiVersioning(v =>
+			{
+				v.AssumeDefaultVersionWhenUnspecified = true;
+				v.ApiVersionReader = new HeaderApiVersionReader("api-version");
+			});
+		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
