@@ -1,5 +1,5 @@
 ﻿using Northwind.Application.Interfaces;
-using Northwind.Domain.Entities;
+using Northwind.Domain.Infrastructure;
 using Northwind.Persistence.Helpers;
 using Northwind.Persistence.Interfaces;
 using System;

@@ -1,4 +1,4 @@
-﻿namespace Northwind.Domain.Entities
+﻿namespace Northwind.Domain.Infrastructure
 {
 	public abstract class Entity
 	{

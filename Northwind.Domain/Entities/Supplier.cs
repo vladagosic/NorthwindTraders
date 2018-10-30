@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Northwind.Domain.Infrastructure;
+using System.Collections.Generic;
 
 namespace Northwind.Domain.Entities
 {
