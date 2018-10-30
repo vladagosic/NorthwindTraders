@@ -12,7 +12,7 @@
     "application/*+json"
   ],
   "paths": {
-    "/api/Admin/EmployeeManagerReport": {
+    "/api/Admin": {
       "get": {
         "tags": [
           "Admin"
@@ -34,9 +34,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Admin/ChangeEmployeeManager": {
+      },
       "post": {
         "tags": [
           "Admin"
@@ -100,7 +98,7 @@
         }
       }
     },
-    "/api/Categories/GetCategoryPreview": {
+    "/api/Categories": {
       "get": {
         "tags": [
           "Categories"
@@ -136,7 +134,7 @@
         }
       }
     },
-    "/api/Customers/GetAll": {
+    "/api/Customers": {
       "get": {
         "tags": [
           "Customers"
@@ -159,41 +157,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Customers/Get/{id}": {
-      "get": {
-        "tags": [
-          "Customers"
-        ],
-        "operationId": "Customers_Get",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "nullable": true
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "file"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Customers/Create": {
+      },
       "post": {
         "tags": [
           "Customers"
@@ -225,7 +189,37 @@
         }
       }
     },
-    "/api/Customers/Update/{id}": {
+    "/api/Customers/{id}": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "operationId": "Customers_Get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "file"
+                }
+              }
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "Customers"
@@ -267,9 +261,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Customers/Delete/{id}": {
+      },
       "delete": {
         "tags": [
           "Customers"
@@ -301,7 +293,7 @@
         }
       }
     },
-    "/api/Products/GetAll": {
+    "/api/Products": {
       "get": {
         "tags": [
           "Products"
@@ -324,46 +316,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Products/Get/{id}": {
-      "get": {
-        "tags": [
-          "Products"
-        ],
-        "operationId": "Products_Get",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "nullable": true,
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/ProductViewModel"
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Products/Create": {
+      },
       "post": {
         "tags": [
           "Products"
@@ -400,7 +353,42 @@
         }
       }
     },
-    "/api/Products/Update/{id}": {
+    "/api/Products/{id}": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_Get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "nullable": true,
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ProductViewModel"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "Products"
@@ -447,9 +435,7 @@
             }
           }
         }
-      }
-    },
-    "/api/Products/Delete/{id}": {
+      },
       "delete": {
         "tags": [
           "Products"
@@ -532,6 +518,18 @@
           "Suppliers"
         ],
         "operationId": "Suppliers_Update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
         "requestBody": {
           "x-name": "value",
           "content": {
@@ -542,7 +540,7 @@
             }
           },
           "required": true,
-          "x-position": 1
+          "x-position": 2
         },
         "responses": {
           "200": {

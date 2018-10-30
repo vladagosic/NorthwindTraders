@@ -11,15 +11,20 @@ namespace Northwind.WebUI.Controllers
 {
     public class ProductsController : BaseController
     {
-        // GET: api/Products
-        [HttpGet]
+		private static class Routes
+		{
+			public const string GetProductById = nameof(GetProductById);
+		}
+
+		// GET: api/Products
+		[HttpGet]
         public Task<ProductsListViewModel> GetAll()
         {
             return Mediator.Send(new GetAllProductsQuery());
         }
 
         // GET: api/Products/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = Routes.GetProductById)]
         [ProducesResponseType(typeof(ProductViewModel), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Get(int id)
         {
@@ -33,7 +38,7 @@ namespace Northwind.WebUI.Controllers
         {
             var productId = await Mediator.Send(command);
 
-            return CreatedAtAction("GetProduct", new { id = productId });
+            return CreatedAtAction(Routes.GetProductById, new { id = productId });
         }
 
         // PUT: api/Products/5
