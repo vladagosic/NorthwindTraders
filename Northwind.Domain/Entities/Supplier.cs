@@ -2,14 +2,13 @@
 
 namespace Northwind.Domain.Entities
 {
-    public class Supplier
+    public class Supplier : Entity
     {
         public Supplier()
         {
             Products = new HashSet<Product>();
         }
 
-        public int SupplierId { get; set; }
         public string CompanyName { get; set; }
         public string ContactName { get; set; }
         public string ContactTitle { get; set; }

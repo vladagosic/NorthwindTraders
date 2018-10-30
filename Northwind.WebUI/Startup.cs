@@ -1,6 +1,7 @@
 using FluentValidation.AspNetCore;
 using MediatR;
 using MediatR.Pipeline;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,14 +11,20 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Northwind.Application.Customers.Commands.CreateCustomer;
 using Northwind.Application.Infrastructure;
+using Northwind.Application.Interfaces;
 using Northwind.Application.Products.Queries.GetProduct;
+using Northwind.Application.Suppliers.Services;
 using Northwind.Persistence;
+using Northwind.Persistence.Infrastructure;
+using Northwind.Persistence.Interfaces;
 using Northwind.WebUI.Filters;
 using Northwind.WebUI.Security;
 using NSwag.AspNetCore;
 using System.Reflection;
+using System.Text;
 
 namespace Northwind.WebUI
 {
@@ -40,8 +47,14 @@ namespace Northwind.WebUI
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
             services.AddMediatR(typeof(GetProductQueryHandler).GetTypeInfo().Assembly);
 
-            // Add DbContext using SQL Server Provider
-            services.AddDbContext<NorthwindDbContext>(options =>
+			// Add repository
+			services.AddScoped(typeof(IAsyncRepository<>), typeof(EfAsyncRepository<>));
+
+			// Add services
+			services.AddScoped<ISupplierService, SupplierService>();
+
+			// Add DbContext using SQL Server Provider
+			services.AddDbContext<NorthwindDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("NorthwindDatabase")));
 
 
@@ -61,6 +74,22 @@ namespace Northwind.WebUI
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+			// Add authentication JWT options settings.
+			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+				.AddJwtBearer(options =>
+				{
+					options.TokenValidationParameters = new TokenValidationParameters
+					{
+						ValidateIssuer = true,
+						ValidateAudience = true,
+						ValidateLifetime = true,
+						ValidateIssuerSigningKey = true,
+						ValidIssuer = "northwind.com",
+						ValidAudience = "northwind.com",
+						IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["SecurityKey"]))
+					};
+				});
 
 			// Add custom authorization claim based policy.
 			services.AddAuthorization(options =>
@@ -97,7 +126,11 @@ namespace Northwind.WebUI
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+			// Use authentication. Without it e.g. [Authorize] attribute
+			// will not work.
+			app.UseAuthentication();
+
+			app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
