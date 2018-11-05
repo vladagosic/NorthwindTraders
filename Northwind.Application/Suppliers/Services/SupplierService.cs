@@ -2,8 +2,8 @@
 using Northwind.Application.Helpers;
 using Northwind.Application.Interfaces;
 using Northwind.Application.Suppliers.Models;
+using Northwind.Common;
 using Northwind.Domain.Entities;
-using Northwind.Persistence.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +18,10 @@ namespace Northwind.Application.Suppliers.Services
 		private readonly IAsyncRepository<Product> _productRepository;
 		private readonly IMemoryCache _memoryCache;
 
-		public SupplierService(IAsyncRepository<Supplier> supplierRepository, IAsyncRepository<Product> productRepository, IMemoryCache memoryCache)
+		public SupplierService(
+			IAsyncRepository<Supplier> supplierRepository, 
+			IAsyncRepository<Product> productRepository, 
+			IMemoryCache memoryCache)
 		{
 			_supplierRepository = supplierRepository ?? throw new ArgumentNullException(nameof(supplierRepository));
 			_productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));

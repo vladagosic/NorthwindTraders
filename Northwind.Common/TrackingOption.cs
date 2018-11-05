@@ -1,4 +1,4 @@
-﻿namespace Northwind.Persistence.Helpers
+﻿namespace Northwind.Common
 {
 	/// <summary>
 	/// Defines if the entities returned by the repository

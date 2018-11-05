@@ -1,8 +1,7 @@
-﻿using Northwind.Persistence.Helpers;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Northwind.Persistence.Interfaces
+namespace Northwind.Common
 {
 	/// <summary>
 	/// A generic repository of entities of type <typeparamref name="T"/>

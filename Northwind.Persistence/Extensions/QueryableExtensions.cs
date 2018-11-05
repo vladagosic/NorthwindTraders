@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Northwind.Persistence.Helpers;
+using Northwind.Common;
 using System.Linq;
 
 namespace Northwind.Persistence.Extensions

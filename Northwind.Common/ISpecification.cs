@@ -1,9 +1,8 @@
-﻿using Northwind.Persistence.Helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Northwind.Persistence.Interfaces
+namespace Northwind.Common
 {
 	/// <summary>
 	/// A specification of a query over a repository.

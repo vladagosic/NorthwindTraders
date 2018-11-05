@@ -1,11 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Northwind.Common;
 using Northwind.Persistence.Extensions;
-using Northwind.Persistence.Helpers;
-using Northwind.Persistence.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Northwind.Persistence.Infrastructure

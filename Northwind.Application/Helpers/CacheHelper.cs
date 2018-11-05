@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Northwind.Application.Suppliers.Models;
+using Northwind.Common;
 using Northwind.Domain.Entities;
-using Northwind.Persistence.Helpers;
-using Northwind.Persistence.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +23,9 @@ namespace Northwind.Application.Helpers
 		{
 			_memoryCache = memoryCache;
 		}
-		public CacheHelper(IAsyncRepository<Supplier> actionRepository, IMemoryCache memoryCache)
+		public CacheHelper(IAsyncRepository<Supplier> supplierRepository, IMemoryCache memoryCache)
 		{
-			_supplierRepository = actionRepository;
+			_supplierRepository = supplierRepository;
 			_memoryCache = memoryCache;
 		}
 

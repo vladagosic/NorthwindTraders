@@ -19,19 +19,19 @@ namespace Northwind.Application.Customers.Commands.UpdateCustomer
             RuleFor(x => x.PostalCode).MaximumLength(10);
             RuleFor(x => x.Region).MaximumLength(15);
 
-            RuleFor(c => c.PostalCode).Matches(@"^\d{4}$")
-                .When(c => c.Country == "Australia")
-                .WithMessage("Australian Postcodes have 4 digits");
+            RuleFor(c => c.PostalCode).Matches(@"^\d{5}$")
+                .When(c => c.Country == "Serbia")
+                .WithMessage("Serbian Postcodes have 5 digits");
 
             RuleFor(c => c.Phone)
-                .Must(HaveQueenslandLandLine)
-                .When(c => c.Country == "Australia" && c.PostalCode.StartsWith("4"))
-                .WithMessage("Customers in QLD require at least one QLD landline.");
+                .Must(HaveBelgradeLandLine)
+                .When(c => c.Country == "Serbia" && c.City == "Belgrade")
+                .WithMessage("Customers from Belgrade, Serbia require at least one valid landline.");
         }
 
-        private static bool HaveQueenslandLandLine(UpdateCustomerCommand model, string phoneValue, PropertyValidatorContext ctx)
+        private static bool HaveBelgradeLandLine(UpdateCustomerCommand model, string phoneValue, PropertyValidatorContext ctx)
         {
-            return model.Phone.StartsWith("07") || model.Fax.StartsWith("07");
+            return model.Phone.StartsWith("011") || model.Fax.StartsWith("011");
         }
     }
 }

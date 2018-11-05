@@ -1,7 +1,6 @@
 ﻿using Northwind.Application.Interfaces;
+using Northwind.Common;
 using Northwind.Domain.Infrastructure;
-using Northwind.Persistence.Helpers;
-using Northwind.Persistence.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
