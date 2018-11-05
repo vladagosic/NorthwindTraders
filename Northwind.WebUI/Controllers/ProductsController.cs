@@ -33,7 +33,7 @@ namespace Northwind.WebUI.Controllers
 
         // POST: api/Products
         [HttpPost]
-        [ProducesResponseType(typeof(ProductViewModel), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ProductViewModel), (int)HttpStatusCode.Created)]
         public async Task<IActionResult> Create([FromBody] CreateProductCommand command)
         {
             var productId = await Mediator.Send(command);

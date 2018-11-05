@@ -26,7 +26,7 @@ namespace Northwind.Application.Customers.Commands.UpdateCustomer
             RuleFor(c => c.Phone)
                 .Must(HaveBelgradeLandLine)
                 .When(c => c.Country == "Serbia" && c.City == "Belgrade")
-                .WithMessage("Customers from Belgrade, Serbia require at least one valid landline.");
+                .WithMessage("Customers from Belgrade, Serbia require at least one valid landline starting with 011.");
         }
 
         private static bool HaveBelgradeLandLine(UpdateCustomerCommand model, string phoneValue, PropertyValidatorContext ctx)
