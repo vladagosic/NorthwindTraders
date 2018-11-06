@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using MediatR;
 using Northwind.Application.Interfaces;
+using Northwind.Application.Notifications.Models;
 using Northwind.Domain.Entities;
 using Northwind.Persistence;
 
@@ -40,7 +41,15 @@ namespace Northwind.Application.Customers.Commands.CreateCustomer
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+			await _notificationService.Send(new Message
+			{
+				From = "noreply@acumenics.com",
+				To = "vladimir.gosic@acumenics.com",
+				Subject = "Northwind - TODO: MediatR - Events",
+				Body = "Remember to update the create customer command handler demo to use a MediatR event."
+			});
+
+			return Unit.Value;
         }
     }
 }
