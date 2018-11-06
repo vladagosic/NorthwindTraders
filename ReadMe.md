@@ -1,8 +1,6 @@
 # NorthwindTraders
 
-Northwind Traders is a sample application built using ASP.NET Core and Entity Framework Core. The architecture and design of the project is explained in the video:
-
-* [Developing Enterprise Apps with ASP.NET Core 2.1](https://youtu.be/fAJrVf8f6M4)
+Northwind Traders is a sample application built using ASP.NET Core and Entity Framework Core. 
 
 The initial construction of this project is explained in the following blog posts:
 
@@ -17,7 +15,7 @@ Use these instuctions to get the project up and running.
 You will need the following tools:
 
 * [Visual Studio Code or 2017](https://www.visualstudio.com/downloads/)
-* [.NET Core SDK 2.2 Preview 2](https://www.microsoft.com/net/download/dotnet-core/2.2)
+* [.NET Core SDK 2.1](https://www.microsoft.com/net/download/dotnet-core/2.1)
 
 ### Setup
 Follow these steps to get your development environment set up:
@@ -44,9 +42,9 @@ Follow these steps to get your development environment set up:
   6. Launch [http://localhost:52468/api](http://localhost:52468/api) in your browser to view the API
 
 ## Technologies
-* [.NET Core 2.2](https://blogs.msdn.microsoft.com/dotnet/2018/09/12/announcing-net-core-2-2-preview-2/)
-* [ASP.NET Core 2.2](https://blogs.msdn.microsoft.com/webdev/2018/08/22/asp-net-core-2-2-0-preview1-now-available/)
-* [Entity Framework Core 2.2](https://blogs.msdn.microsoft.com/dotnet/2018/09/12/announcing-entity-framework-core-2-2-preview-2/)
+* [.NET Core 2.1](https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-net-core-2-1/)
+* [ASP.NET Core 2.1](https://blogs.msdn.microsoft.com/webdev/2018/05/30/asp-net-core-2-1-0-now-available/)
+* [Entity Framework Core 2.1](https://blogs.msdn.microsoft.com/dotnet/2018/05/30/announcing-entity-framework-core-2-1)
 
 ## License
 
